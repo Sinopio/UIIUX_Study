@@ -1,16 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
 import flower from '../assets/StartSceneFlower.png';
+import BackGround from '../assets/BackGround_j.png';
 
 const StartScreen = ({navigation}) =>{
   return(
-    <View style={styles.container} >
-    <Image source={flower} style = {styles.box} />
-    <Text>코로나19힐링어플</Text>
-    <Button title="Press To Start" 
-      onPress={() => navigation.navigate("Main")}
-      />
+    <View>
+      <ImageBackground
+        style = {{width:'100%', height:'100%'}}
+        source = {BackGround}
+        resizeMode = "cover"  
+      >
+        <View style={styles.container} >
+          <Image source={flower} style = {styles.box} />
+          
+          <Button title="Press To Start" 
+           onPress={() => navigation.navigate("Main")}
+          />
+        </View>
+      </ImageBackground>
   </View>
   );
 };
@@ -18,7 +27,6 @@ const StartScreen = ({navigation}) =>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
