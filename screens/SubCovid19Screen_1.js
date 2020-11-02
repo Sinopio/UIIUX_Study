@@ -1,15 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import Diary from '../assets/Diary.png';
 
-const DiaryScreen = ({navigation}) =>{
+const Sub1Covid19Screen = ({navigation}) =>{
   return(
     <View style={styles.container} >
-        <Image source={Diary} style = {styles.Plant1} />
-
-        <Button title="To Calender" onPress={() => navigation.navigate("Calendar")}/>
-        <Button title="To Covid" onPress={() => navigation.navigate("Covid19")}/>
+      <Text> 코로나 서브1 </Text>
     </View>
   );
 };
@@ -28,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DiaryScreen;
+export default Sub1Covid19Screen;
