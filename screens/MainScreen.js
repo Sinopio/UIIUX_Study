@@ -4,6 +4,7 @@ import { StyleSheet, View, Image, ImageBackground, ScrollView  } from 'react-nat
 import { Button, Dialog, Portal } from 'react-native-paper';
 import BackGround from '../assets/BackGround_j2.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 export default class MainScreen extends Component{
