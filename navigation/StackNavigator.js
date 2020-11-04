@@ -10,7 +10,8 @@ import MainDiaryScreen from '../screens/MainDiaryScreen';
 import Sub1DiaryScreen from '../screens/SubDiaryScreen_1';
 
 import MainCovid19Screen from '../screens/MainCovid19Screen';
-import Sub1Covid19Screen from '../screens/SubCovid19Screen_1';
+import Sub1Covid19Screen from '../screens/SubCovid19Screen';
+import Sub1Covid19Screen2 from '../screens/SubCovid19Screen_2';
 
 const Stack = createStackNavigator(); 
 
@@ -54,6 +55,7 @@ const Covid19StackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="MainCovid19Screen" component={MainCovid19Screen}/>
       <Stack.Screen name="Sub1Covid19Screen" component={Sub1Covid19Screen}/>
+      <Stack.Screen name="Sub1Covid19Screen2" component={Sub1Covid19Screen2}/>
     </Stack.Navigator>
   );
 }
