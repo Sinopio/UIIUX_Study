@@ -2,6 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import StartScreen from '../screens/StartScreen';
 import MainScreen from '../screens/MainScreen';
+import CollectionScreen from '../screens/CollectionScreen';
+import TodayListScreen from '../screens/TodayListScreen';
 
 import MainCalendarScreen from '../screens/MainCalendarScreen';
 import Sub1CalendarScreen from '../screens/SubCalendarScreen_1';
@@ -16,7 +18,7 @@ const Stack = createStackNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: "#7BA518",
+    backgroundColor: "#99E000",
   },
   headerTintColor: "white",
   headerBackTitle: "Back",
@@ -27,6 +29,9 @@ const MainStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Start" component={StartScreen}/>
       <Stack.Screen name="Main" component={MainScreen}/>
+      <Stack.Screen name="Collection" component={CollectionScreen}/>
+      <Stack.Screen name="TodayList" component={TodayListScreen}/>
+
     </Stack.Navigator>
   );
 }
@@ -34,7 +39,7 @@ const MainStackNavigator = () => {
 const CalendarStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="MainCalendarScreen" component={MainCalendarScreen}/>
+      <Stack.Screen name="Calendar" component={MainCalendarScreen}/>
       <Stack.Screen name="Sub1CalendarScreen" component={Sub1CalendarScreen}/>
     </Stack.Navigator>
   );

@@ -6,7 +6,7 @@ import { MainStackNavigator, CalendarStackNavigator, DiaryStackNavigator, Covid1
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: "#FFDC73",
+    backgroundColor: "#ABF200",
   },
 };
 
