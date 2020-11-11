@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button} from 'react-native';
-import { Paragraph, DataTable } from 'react-native-paper';
-
+import { Paragraph, DataTable, Card, Title, Divider } from 'react-native-paper';
+import Diary from '../assets/pic.png';
 
 const Covid19Screen = ({navigation}) =>{
   return(
@@ -41,21 +41,34 @@ const Covid19Screen = ({navigation}) =>{
               label="1-2 of 6"
             />
             </DataTable>
-
+                
        </View>
       
 
       <View style={styles.container} > 
 
+      <Card style={styles.card}>
+      <Card.Cover source={Diary} />
+      <Card.Actions>
+      </Card.Actions>
+      </Card>
 
-        <Button title="실시간 뉴스" onPress={() => navigation.navigate("Sub1Covid19Screen")}/>
+      <Card style={styles.card}>
+      <Card.Cover source={Diary} />
+      <Card.Actions>
+      </Card.Actions>
+      </Card>
 
-        <Paragraph>                        </Paragraph>
-
-        <Button title="선별 진료소" onPress={() => navigation.navigate("Sub1Covid19Screen_2")}/>
-
-    </View>
+      </View>
        
+      <View style={styles.container} > 
+
+      <Button title="실시간 뉴스" onPress={() => navigation.navigate("Sub1Covid19Screen")}/>
+      <Paragraph>                        </Paragraph>
+      <Button title="선별 진료소"/>  
+      
+      </View>  
+
     </View>
   );
 };
@@ -73,12 +86,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
+
   Plant1:{
     width: '10%',
     height: '10%',
     resizeMode: 'contain'
+  },
+
+  card: {
+    flex: 1,
+    width: "50%",
+    height: "50%",
+    margin: 10,
   },
 });
 

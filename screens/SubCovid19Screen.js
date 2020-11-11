@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Text, View, Image, ScrollView, Linking } from 'react-native';
+import { Text, View, Image, ScrollView, Linking, StyleSheet } from 'react-native';
 import {Card, Title, Paragraph, Divider, Button} from 'react-native-paper';
 import Diary from '../assets/nuguri4.jpg';
 import Diary2 from '../assets/nuguri5.jpg';
@@ -8,9 +8,12 @@ import Diary3 from '../assets/nuguri6.jpg';
 
 const Sub1Covid19Screen = ({navigation}) =>{
   return(
+
     <View>
+
     <ScrollView>
-      <Card>
+
+      <Card style={styles.card}>
       <Card.Content>
         <Title>너구리 3연속 롤드컵 우승</Title>
         <Paragraph>점심은 나가서 짜파구리를 먹을 예정</Paragraph>
@@ -19,9 +22,10 @@ const Sub1Covid19Screen = ({navigation}) =>{
       <Card.Actions>
       <Button onPress={() =>  Linking.openURL('http://www.inven.co.kr/webzine/news/?news=246581&site=lol')} >기사보기</Button>
       </Card.Actions>
+      </Card>
 
-      <Divider />
-     
+
+      <Card style={styles.card}>
       <Card.Content>
         <Title>너구리 3연속 과제 제출!</Title>
         <Paragraph>이것은 과제가 아니다 너구리이다</Paragraph>
@@ -30,9 +34,9 @@ const Sub1Covid19Screen = ({navigation}) =>{
       <Card.Actions>
       <Button onPress={() =>  Linking.openURL('http://www.inven.co.kr/webzine/news/?news=246581&site=lol')} >기사보기</Button>
       </Card.Actions>
-  
-      <Divider />
-  
+      </Card>
+
+      <Card style={styles.card}>
       <Card.Content>
         <Title>너구리!! 코로나 안걸려 화제,  비결은   과제를 안한 것</Title>
         <Paragraph>너굴너굴너굴너굴너굴너굴</Paragraph>
@@ -43,10 +47,27 @@ const Sub1Covid19Screen = ({navigation}) =>{
       </Card.Actions>
       </Card>
 
-
     </ScrollView>
     </View>
     );
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'lightgreen',
+    },
+   
+    content: {
+      padding: 1,
+    },
+    
+    card: {
+      flexDirection: 'row',
+  
+      margin: 20,
+    },
+ 
+  });
 
 export default Sub1Covid19Screen;

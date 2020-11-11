@@ -1,57 +1,97 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Avatar, Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
-import {ScrollView, View} from 'react-native'
-import Diary from '../assets/nuguri.jpg';
-import Diary2 from '../assets/nuguri2.png';
-import Diary3 from '../assets/nuguri3.png';
+import { Avatar, Button, Card, Title, Paragraph, Divider, IconButton,FAB, Portal, Provider} from 'react-native-paper';
+import {ScrollView, View, StyleSheet} from 'react-native'
+import Diary from '../assets/pic.png';
 
 const DiaryScreen = ({navigation}) =>{
+
+  const [state, setState] = React.useState({ open: false });
+  const onStateChange = ({ open }) => setState({ open });
+  const { open } = state;
+
   return(
-  <View>
-  <ScrollView>
 
-    <Card>
-    <Card.Content>
-      <Title>오늘의 일기</Title>
-      <Paragraph>점심 나가서 먹을 것 같아 점심 나가서 먹을 것 같아</Paragraph>
-    </Card.Content>
+    <View>
+  <ScrollView>  
+
+    <Card style={styles.card}>
     <Card.Cover source={Diary} />
-    <Card.Actions>
-      <Button onPress={() => navigation.navigate("Sub1DiaryScreen")} >작성하기</Button>
-      <Button>삭제</Button>
-    </Card.Actions>
-    
-    <Divider />
-    
-    <Card.Content>
-      <Title>내일의 일기</Title>
-      <Paragraph>저녁 나가서 먹을 것 같아 저녁 나가서 먹을 것 같아</Paragraph>
-    </Card.Content>
-    <Card.Cover source={Diary2} />
-    <Card.Actions>
-      <Button onPress={() => navigation.navigate("Sub1DiaryScreen")} >작성하기</Button>
-      <Button>삭제</Button>
-    </Card.Actions>
+    <Card.Actions style>
 
-    <Divider />
-
-    <Card.Content>
-      <Title>모레의 일기</Title>
-      <Paragraph>과제하다 죽은 학생은 원념이 되어 그를 평생 괴롭혔다.</Paragraph>
-    </Card.Content>
-    <Card.Cover source={Diary3} />
-    <Card.Actions>
-      <Button onPress={() => navigation.navigate("Sub1DiaryScreen")} >작성하기</Button>
-      <Button>삭제</Button>
     </Card.Actions>
     </Card>
 
+    <Card style={styles.card}>
+    <Card.Cover source={Diary} />
+    <Card.Actions>
+
+    </Card.Actions>
+    </Card>
+
+    <Card style={styles.card}>
+    <Card.Cover source={Diary} />
+    <Card.Actions>
+    </Card.Actions>
+    </Card>
+
+
   </ScrollView>
-  </View>
+  <Provider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          icon={open ? 'calendar-today' : 'plus'}
+
+          actions={[
+            {
+              icon: 'pen',
+              label: '일기 쓰기',
+              onPress: () => navigation.navigate("Sub1DiaryScreen"),
+            },
+
+            {
+              icon: 'trash-can',
+              label: '삭제하기',
+              onPress: () => console.log('Pressed notifications'),
+            },
+          ]}
+
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </Provider>
+    </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'lightgreen',
+  },
+ 
+  content: {
+    padding: 1,
+  },
+  
+  card: {
+    flexDirection: 'row',
 
+    margin: 20,
+  },
+
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 export default DiaryScreen;
