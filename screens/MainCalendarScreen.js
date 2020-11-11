@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+//import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Calender from '../assets/Calendar.png';
 
 const CalendarScreen = ({navigation}) =>{
   return(
     <View>
-        <Calendar
+      
+        {/*<Calendar
           style={{width:'100%',height:'100%', 
           justifyContent: 'center',}}
           //처음 보이는 달
@@ -42,7 +43,8 @@ const CalendarScreen = ({navigation}) =>{
           // 오른쪽 화살표를 눌렀을 때 실행되는 함수.
           onPressArrowRight={addMonth => addMonth()}
         >
-        </Calendar>
+        </Calendar>*/}
+        <Text> react-native-calendars 오류</Text>
     </View>
     
   );

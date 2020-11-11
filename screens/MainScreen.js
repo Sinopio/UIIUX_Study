@@ -4,17 +4,15 @@ import { StyleSheet, View, Image, ImageBackground, ScrollView  } from 'react-nat
 import { Button, Dialog, Portal } from 'react-native-paper';
 import BackGround from '../assets/BackGround_j2.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import CollectionScreen from '../screens/CollectionScreen';
 
 
 export default class MainScreen extends Component{
   constructor(){
     super();
 
-    //const [visible, setVisible] = React.useState(false);
-    
     this.state ={
-      img: require('../assets/Plant_Nomalpng.png'),
+      img: require('../assets/Plant6.png'),
     };
   }
 
@@ -26,11 +24,14 @@ export default class MainScreen extends Component{
           source = {BackGround}       
           > 
           <View view style={styles.topmenu}>
-            <Button 
-              style = {styles.collection}
-              mode="contained"
+            <TouchableOpacity 
               onPress={() => this.props.navigation.navigate("Collection")}
-            />          
+              
+            >
+              <Image 
+                source={require("../assets/Collection.png")}
+              />
+            </TouchableOpacity>     
             <Button 
               icon="book" style = {styles.collection}
               mode="contained"
@@ -102,8 +103,9 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   Plant:{
-    width: '130%',
+    width: '100%',
     height: '100%',
+    resizeMode: 'contain',
   },
   collection:{
     width: '10%',

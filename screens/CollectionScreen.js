@@ -1,124 +1,184 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, View, Image, Text, ScrollView } from 'react-native';
-import { Modal, Portal, Provider, Divider} from 'react-native-paper';
+import { Modal, Portal, Provider, Divider, Dialog, Button} from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+export default class CollectionScreen extends Component{
+  constructor(props){
+    super(props);
 
-const CollectionScreen = () =>{
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
-
-  return(
-    <View>
-      <ScrollView>
-        <TouchableOpacity onPress={showModal} >
-          <Image 
-          style={styles.image1}
-          source={{uri:'https://image.librewiki.net/thumb/2/2c/%EC%97%98%ED%92%8D.png/240px-%EC%97%98%ED%92%8D.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-           style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/8/80/%EB%82%98%EB%AC%B4%EC%A7%80%EA%B8%B0.png/240px-%EB%82%98%EB%AC%B4%EC%A7%80%EA%B8%B0.png'}}
-         />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
+    this.state={
+      visible: false,
+      plantNum: 0,
+    }
+  }
+  
+  render(){
+    const { visible, plantNum } = this.state;
+    const { navigation } = this.props;
+    return(      
+      <View style={styles.container}>
+        <ScrollView
+          style={{width: '100%',}}
+        >
+          <TouchableOpacity onPress={() => this.setState({visible: !visible})}
+            style={styles.box1} >
+            <Image 
             style={styles.image1}
-            source={{uri:'https://image.librewiki.net/thumb/4/43/%EB%93%9C%EB%A0%88%EB%94%94%EC%96%B4.png/240px-%EB%93%9C%EB%A0%88%EB%94%94%EC%96%B4.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-            style={styles.image1}
-            source={{uri:'https://image.librewiki.net/thumb/2/2f/%EB%A1%9C%ED%8C%8C%ED%8C%8C.png/240px-%EB%A1%9C%ED%8C%8C%ED%8C%8C.png'}}
-         />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-         <Image 
-           style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/f/f8/%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80.png/240px-%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-         <Image 
-            style={styles.image1}
-            source={{uri:'https://image.librewiki.net/thumb/3/3d/%EC%A3%BC%EB%A6%AC%EB%B9%84%EC%96%80.png/240px-%EC%A3%BC%EB%A6%AC%EB%B9%84%EC%96%80.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-           style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/7/7e/%EC%9A%B0%EC%B8%A0%EB%8F%99.png/240px-%EC%9A%B0%EC%B8%A0%EB%8F%99.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-           style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/3/3e/%EC%95%BC%EB%82%98%ED%94%84.png/240px-%EC%95%BC%EB%82%98%ED%94%84.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-            style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/e/ea/%EC%97%B0%EA%BD%83%EB%AA%AC.png/240px-%EC%97%B0%EA%BD%83%EB%AA%AC.png'}}
-          />
-        </TouchableOpacity>
-        <Divider />
-        <TouchableOpacity>
-          <Image 
-           style={styles.image1}
-           source={{uri:'https://image.librewiki.net/thumb/b/be/%EB%B0%B1%EC%86%9C%EB%AA%A8%EC%B9%B4.png/240px-%EB%B0%B1%EC%86%9C%EB%AA%A8%EC%B9%B4.png'}}
-          />
-        </TouchableOpacity>
-      </ScrollView>
-
-    <Provider>
-      <Portal>
-        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-          <TouchableOpacity onPress={hideModal}>
-            <Text>547 엘풍</Text>
-            <Text>돌풍 포켓몬</Text>
-            <Text>회오리바람과 함께 나타나 집안의 가구를 움직이거나 솜을 남기는 장난을 한다.</Text>
+            source ={require('../assets/Plant6.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 작은 새싹 </Text>
+              <Text> 마음이 아파요 </Text>
+              <Text> 종강은 언제쯤 할까요 </Text>
+            </View>
           </TouchableOpacity>
-        </Modal>
-      </Portal>
-    </Provider>
+  
+          <TouchableOpacity onPress={() => this.setState({visible: !visible})}
+            style={styles.box1} >
+            <Image 
+             style={styles.image1}
+             source ={require('../assets/Plant1.png')}
+           />
+           <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 종강 난 </Text>
+              <Text> 종강을 바라는 마음이 </Text>
+              <Text> 새싹을 난으로 키웠어요 </Text>
+            </View>
+          </TouchableOpacity>
+  
+          <TouchableOpacity 
+            style={styles.box1} >
+            <Image 
+              style={styles.image1}
+              source ={require('../assets/Plant2.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 이름이 없어요 </Text>
+              <Text> 과제에서 해방돼 </Text>
+              <Text> 자유롭게 산책하고 싶어요 </Text>
+            </View>
+          </TouchableOpacity>
+  
+          <TouchableOpacity 
+            style={styles.box1} >
+            <Image 
+              style={styles.image1}
+              source ={require('../assets/Plant3.png')}
+           />
+           <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 힐링어플!! </Text>
+              <Text> 침대에서 뒹굴거리는게 </Text>
+              <Text> 힐링아닐까요 </Text>
+            </View>
+          </TouchableOpacity>
+  
+          <TouchableOpacity 
+            style={styles.box1} >
+           <Image 
+             style={styles.image1}
+             source ={require('../assets/Plant4.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 허리운동 </Text>
+              <Text> 의자에서 일어나서 </Text>
+              <Text> 허리를 피고 스트레칭 </Text>
+            </View>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.box1} >
+           <Image 
+              style={styles.image1}
+              source ={require('../assets/Plant5.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 작은 새싹 </Text>
+              <Text> 마음이 아파요 </Text>
+              <Text> 종강은 언제쯤 할까요 </Text>
+            </View>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.box1} >
+            <Image 
+             style={styles.image1}
+             source ={require('../assets/Plant7.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 작은 새싹 </Text>
+              <Text> 마음이 아파요 </Text>
+              <Text> 종강은 언제쯤 할까요 </Text>
+            </View>
+          </TouchableOpacity>
+  
+          <TouchableOpacity 
+            style={styles.box1} >
+            <Image 
+             style={styles.image1}
+             source ={require('../assets/Plant8.png')}
+            />
+            <View style = {{flexDirection: 'column',justifyContent: 'space-around',}}>
+              <Text> 작은 새싹 </Text>
+              <Text> 마음이 아파요 </Text>
+              <Text> 종강은 언제쯤 할까요 </Text>
+            </View>
+          </TouchableOpacity>
+  
+        </ScrollView>
+  
+      <Provider>
+        <Portal>
+          <Dialog visible={visible} onDismiss={() => this.setState({visible: !visible})} style={styles.dialog1}>
+            <Dialog.Actions style={{justifyContent: 'space-between',}}>
+              <View>
+                <Text>이 식물을 적용할까요?</Text>
+              </View>
+              <View style={{flexDirection: 'row',}}>
+                <Button onPress={() => console.log('yes')}>
+                  네</Button>
+                  {/*this.props.navigation.navigate('Main', {plantNum:1})*/}
+                <Button onPress={() => console.log('no')}>
+                  아니오</Button>
+              </View>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      </Provider>
+  
+    </View>
+    );
+  }
+}
 
-  </View>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:'#DFF0C3',
+    alignItems:'stretch',
   },
   image1:{
-   height:200,
    width:200,
+   height:200,
    resizeMode:'contain',
-   alignItems: 'flex-start',
+   alignItems: 'center',
    justifyContent: 'center',
+   margin: 10,
   },
   box1:{
+    borderColor: 'green', 
+    borderWidth:1, 
+    width:'95%', 
     alignItems: 'center',
-    justifyContent: 'center',
-  }
+    margin: 10,
+    flexDirection: 'row'
+  },
+  dialog1:{
+    justifyContent: 'space-between',
+  },
 });
-
-export default CollectionScreen;
