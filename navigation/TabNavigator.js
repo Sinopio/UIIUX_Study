@@ -4,6 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MainStackNavigator, CalendarStackNavigator, DiaryStackNavigator, Covid19StackNavigator } from '../navigation/StackNavigator';
 
+import MainScreen from "../screens/MainScreen";
+
 const screenOptionStyle = {
   headerStyle: {
     backgroundColor: "#FFDC73",
@@ -16,8 +18,9 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={screenOptionStyle}>
       <Tab.Screen name="Main" component={MainStackNavigator}
-        options={{ tabBarIcon:({color, size}) => (
-        <MaterialCommunityIcons name = "home" color={color} size={size}/> )}} 
+        options={{ headerShown: false, tabBarIcon:({color, size}) => (
+        <MaterialCommunityIcons name = "home" color={color} size={size}/> )          
+      }} 
       />
       <Tab.Screen name="Calendar" component={CalendarStackNavigator}
         options={{ tabBarIcon:({color, size}) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import StartScreen from '../screens/StartScreen';
 import MainScreen from '../screens/MainScreen';
 import CollectionScreen from '../screens/CollectionScreen';
@@ -19,17 +20,16 @@ const Stack = createStackNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: "#DFF0C3",
+    backgroundColor: "#B2C9E9",
   },
-  headerTintColor: "green",
+  headerTintColor: "white",
   headerBackTitle: "Back",
 };
 
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Start" component={StartScreen}/>
-      <Stack.Screen name="Main" component={MainScreen}/>
+      <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}} />
       <Stack.Screen name="Collection" component={CollectionScreen}/>
       <Stack.Screen name="TodayList" component={TodayListScreen}/>
     </Stack.Navigator>
