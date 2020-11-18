@@ -1,14 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import {
+  StyleSheet, Text, View, Image,
+  Button, ImageBackground
+} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 //import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Calender from '../assets/Calendar.png';
+import BackGround from '../assets/MainBackGround.png'
+import BottomBar from '../assets/BottomBar.png'
 
-const CalendarScreen = ({navigation}) =>{
-  return(
-    <View>
-      
-        {/*<Calendar
+const CalendarScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+
+      {/*<Calendar
           style={{width:'100%',height:'100%', 
           justifyContent: 'center',}}
           //처음 보이는 달
@@ -44,19 +50,79 @@ const CalendarScreen = ({navigation}) =>{
           onPressArrowRight={addMonth => addMonth()}
         >
         </Calendar>*/}
+      <View style={{ width: '100%', flex: 10 }}
+        source={BackGround}>
         <Text> react-native-calendars 오류</Text>
+      </View>
+
+      <ImageBackground
+        style={{ width: '100%', flex: 1.5 }}
+        source={BottomBar}
+      >
+        <View style={{ flex: 1 }} />
+        <View style={styles.bottombarstyle}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Main")}
+            style={styles.bottombarImage}
+          >
+            <Image
+              source={require("../assets/Home.png")}
+              style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Calendar")}
+            style={styles.bottombarImage}
+          >
+            <Image
+              source={require("../assets/Calendar.png")}
+              style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("MainCovid19")}
+            style={styles.bottombarImage}
+          >
+            <Image
+              source={require("../assets/Wuhan19.png")}
+              style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("MainDiary")}
+            style={styles.bottombarImage}
+          >
+            <Image
+              source={require("../assets/Diary.png")}
+              style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+            />
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+
     </View>
-    
+
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width:'100%', 
-    height:'100%',
-    backgroundColor: '#fff',
+    flex: 1,
+  },
+  bottombarstyle: {
+    flex: 3,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  bottombarImage: {
+    width: 50,
+    height: 50,
   },
 });
 

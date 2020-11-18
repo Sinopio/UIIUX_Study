@@ -32,6 +32,16 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}} />
       <Stack.Screen name="Collection" component={CollectionScreen}/>
       <Stack.Screen name="TodayList" component={TodayListScreen}/>
+
+      <Stack.Screen name="Calendar" component={MainCalendarScreen}/>
+      <Stack.Screen name="Sub1CalendarScreen" component={Sub1CalendarScreen}/>
+
+      <Stack.Screen name="MainDiary" component={MainDiaryScreen}/>
+      <Stack.Screen name="Sub1DiaryScreen" component={Sub1DiaryScreen}/>
+
+      <Stack.Screen name="MainCovid19" component={MainCovid19Screen}/>
+      <Stack.Screen name="Sub1Covid19Screen" component={Sub1Covid19Screen}/>
+      <Stack.Screen name="Sub1Covid19Screen2" component={Sub1Covid19Screen2}/>
     </Stack.Navigator>
   );
 }
