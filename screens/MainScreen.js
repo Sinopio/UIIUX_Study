@@ -1,13 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   StyleSheet, View, Image, ImageBackground,
-  ScrollView, Text, SafeAreaView
+  ScrollView, Text, SafeAreaView, TouchableWithoutFeedback
 } from 'react-native';
 import { Modal, Portal, Provider, Divider, Dialog, Button } from 'react-native-paper';
-import BackGround from '../assets/MainBackGround.png'
+import Animated, {
+  Easing, useSharedValue, withSpring, useAnimatedStyle,
+  repeat, delay, useAnimatedGestureHandler, withTiming, sequence
+} from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import CollectionScreen from '../screens/CollectionScreen';
+import BackGround from '../assets/MainBackGround.png'
 import BottomBar from '../assets/BottomBar.png'
+import StartScreen from '../assets/StartSceen.png'
+
+const StartButtonAni = (props) => {
+  const x = useSharedValue(0);
+  const y = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const open = true;
+
+  const blink = () => {
+    scale.value = sequence(withTiming(0.9), repeat(withTiming(1.0), -1, true));
+  }
+
+  useEffect(() => {
+    switch (open) {
+      case true:
+        blink();
+        break;
+    }
+  }, [open]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: x.value },
+        { translateY: y.value },
+        { scale: scale.value }
+      ]
+    }
+  });
+
+  return (
+    <Animated.View style={[animatedStyle]} >
+      <View style={{ flex: 0.96 }} />
+      <TouchableWithoutFeedback onPress={blink} style={{ flex: 1 }}>
+        <Image source={require("../assets/StartButton.png")} />
+      </TouchableWithoutFeedback>
+    </Animated.View>
+  );
+}
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -15,20 +59,44 @@ export default class MainScreen extends Component {
 
     this.state = {
       img: require('../assets/Plant6.png'),
-      visible: false,
+      visible: true,
+      _plantNum: 0,
     };
   }
 
+  callbackFromCollection(data) {
+    this.setState({ _plantNum: data });
+  }
+
+  callChildMethod=()=>{
+    this.child.childMethod(this.state.Usrname);
+  }
+
+  giveNutrition = () => {
+    this.setState({ img: require('../assets/Plant_Nutrition.png') });
+  }
+
+  giveWater = () => {
+    this.setState({ img: require('../assets/Plant_Water.png') });
+  }
+
+  giveLight = () => {
+    this.setState({ img: require('../assets/Plant_Light.png') });
+  }
+
   render() {
+    let animatedStyle = { transform: [{ translateY: this.state.offsetY }] };
     const { visible } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-
+        {/*<CollectionScreen ref={ref => (this.child = ref)}
+        referenceCallback = {this.callbackFromCollection.bind(this)} />*/}
         {/* Main 화면 구성 부분*/}
         <ImageBackground
           style={{ width: '100%', flex: 10 }}
           source={BackGround}
         >
+          {/* 상단버튼 */}
           <View view style={styles.topmenu}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Collection")}
@@ -37,15 +105,14 @@ export default class MainScreen extends Component {
                 source={require("../assets/Collection.png")}
               />
             </TouchableOpacity>
-
-            {/* <Button 
-              icon="book" style = {styles.collection}
+            <Button
+              icon="book" style={styles.collection}
               mode="contained"
               onPress={() => this.props.navigation.navigate("TodayList")}
-           />*/}
+            />
 
           </View>
-
+          {/* 물 */}
           <View style={styles.middlemenu1}>
             <TouchableOpacity
               onPress={this.giveWater} style={styles.SpotButton}
@@ -56,7 +123,7 @@ export default class MainScreen extends Component {
               />
             </TouchableOpacity>
           </View>
-
+          {/* 삽, 햇빛 */}
           <View style={styles.middlemenu2}>
             <TouchableOpacity
               onPress={this.giveNutrition} style={styles.SpotButton}
@@ -77,6 +144,8 @@ export default class MainScreen extends Component {
             </TouchableOpacity>
           </View>
 
+          <View style={{ flex: 1 }} />
+          {/* 중앙 식물 */}
           <View View style={styles.PlantSpot}>
             <Image source={this.state.img} style={styles.Plant} />
           </View>
@@ -126,7 +195,9 @@ export default class MainScreen extends Component {
               <Image
                 source={require("../assets/Diary.png")}
                 style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+
               />
+
             </TouchableOpacity>
           </View>
 
@@ -134,26 +205,27 @@ export default class MainScreen extends Component {
 
         {/* Start 화면 구성 부분*/}
         <Modal
-          visible={this.state.visible} onDismiss={() => this.setState({ visible: !visible })}
-          contentContainerStyle={{ width: '80%', height: '100%', backgroundColor: 'white', padding: 20 }}
+          visible={this.state.visible}
+          contentContainerStyle={{ width: '100%', height: '100%', backgroundColor: 'white', }}
         >
+          <ImageBackground
+            style={styles.absoluteContainer}
+            source={StartScreen}
+          >
+            <View style={{ animatedStyle }}>
+              <TouchableOpacity
+                onPress={() => this.setState({ visible: !visible })}
+                style={{ justifyContent: 'center', alignItems: 'center' }}
+              >
+                <StartButtonAni style={[styles.absoluteContainer]} />
+              </TouchableOpacity>
+            </View>
 
+          </ImageBackground>
         </Modal>
 
       </SafeAreaView>
     );
-  }
-
-  giveNutrition = () => {
-    this.setState({ img: require('../assets/Plant_Nutrition.png') });
-  }
-
-  giveWater = () => {
-    this.setState({ img: require('../assets/Plant_Water.png') });
-  }
-
-  giveLight = () => {
-    this.setState({ img: require('../assets/Plant_Light.png') });
   }
 }
 
@@ -212,5 +284,12 @@ const styles = StyleSheet.create({
   bottombarImage: {
     width: 50,
     height: 50,
+  },
+  absoluteContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });
