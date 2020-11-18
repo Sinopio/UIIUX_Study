@@ -48,26 +48,9 @@ const Covid19Screen = ({ navigation }) => {
 
           </View>
 
-
           <View style={styles.container} >
 
-            <Card style={styles.card}>
-              <Card.Cover source={Diary} />
-              <Card.Actions>
-              </Card.Actions>
-            </Card>
-
-            <Card style={styles.card}>
-              <Card.Cover source={Diary} />
-              <Card.Actions>
-              </Card.Actions>
-            </Card>
-
-          </View>
-
-          <View style={styles.container} >
-
-            <Button title="실시간 뉴스" onPress={() => navigation.navigate("Sub1Covid19Screen")} />
+            <Button title="현재 위치" onPress={() => navigation.navigate("Sub1Covid19Screen")} />
             <Paragraph>                        </Paragraph>
             <Button title="선별 진료소" />
 
