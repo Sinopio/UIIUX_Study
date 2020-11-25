@@ -11,7 +11,7 @@
       "backgroundColor": "#ffffff"
     },
     "android": {
-      "package": "com.exam",
+      "package": "com.exam.exam",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyDl3i7bAPMcofZwEeWdggA44vE2V9HpPsU"
