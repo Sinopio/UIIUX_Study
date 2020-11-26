@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, View, Image, ImageBackground, Text, TextInput, 
   ScrollView } from 'react-native';
-import BackGround from '../assets/BackGround_j2.png';
+import BackGround from '../assets/MainBackGround.png';
 import TodoInsert from '../todaylist/TodoInsert';
 import TodoList from '../todaylist/TodoList';
 

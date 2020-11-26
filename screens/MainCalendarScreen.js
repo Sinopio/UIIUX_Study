@@ -76,7 +76,7 @@ const CalendarScreen = ({ navigation }) => {
             style={styles.bottombarImage}
           >
             <Image
-              source={require("../assets/Calendar.png")}
+              source={require("../assets/Calendar_S.png")}
               style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
             />
           </TouchableOpacity>

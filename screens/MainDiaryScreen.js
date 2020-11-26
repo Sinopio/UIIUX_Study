@@ -115,7 +115,7 @@ const DiaryScreen = ({ navigation }) => {
             style={styles.bottombarImage}
           >
             <Image
-              source={require("../assets/Diary.png")}
+              source={require("../assets/Diary_S.png")}
               style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
             />
           </TouchableOpacity>

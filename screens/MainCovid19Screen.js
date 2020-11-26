@@ -91,7 +91,7 @@ const Covid19Screen = ({ navigation }) => {
             style={styles.bottombarImage}
           >
             <Image
-              source={require("../assets/Wuhan19.png")}
+              source={require("../assets/Wuhan19_S.png")}
               style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
             />
           </TouchableOpacity>

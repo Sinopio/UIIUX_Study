@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {
   StyleSheet, View, Image, ImageBackground,
   ScrollView, Text, SafeAreaView, TouchableWithoutFeedback
@@ -10,10 +10,19 @@ import Animated, {
   repeat, delay, useAnimatedGestureHandler, withTiming, sequence
 } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import CollectionScreen from '../screens/CollectionScreen';
-import BackGround from '../assets/MainBackGround.png'
-import BottomBar from '../assets/BottomBar.png'
-import StartScreen from '../assets/StartSceen.png'
+import BackGround from '../assets/MainBackGround.png';
+import BottomBar from '../assets/BottomBar.png';
+import StartScreen from '../assets/StartSceen.png';
+import Plant1 from '../assets/Plant6.png';
+import Plant2 from '../assets/Plant1.png';
+import Plant3 from '../assets/Plant2.png';
+import Plant4 from '../assets/Plant3.png';
+import Plant5 from '../assets/Plant4.png';
+import Plant6 from '../assets/Plant5.png';
+import Plant7 from '../assets/Plant7.png';
+import Plant8 from '../assets/Plant8.png';
 
 const StartButtonAni = (props) => {
   const x = useSharedValue(0);
@@ -22,7 +31,7 @@ const StartButtonAni = (props) => {
   const open = true;
 
   const blink = () => {
-    scale.value = sequence(withTiming(0.9), repeat(withTiming(1.0), -1, true));
+    scale.value = sequence(withTiming(0.98), repeat(withTiming(1.0), -1, true));
   }
 
   useEffect(() => {
@@ -53,49 +62,89 @@ const StartButtonAni = (props) => {
   );
 }
 
+const SetImage = (props) => {
+  const [plantNum, setNumber] = useState(CollectionScreen.getPlantNum());
+  const PlantImg = {img:  Plant1};
+
+  console.log("setImageCalled >> ", CollectionScreen.getPlantNum());
+
+  useEffect(() => {
+
+    setNumber(CollectionScreen.getPlantNum());
+
+  });
+
+  switch (plantNum) {
+    case 1:
+      PlantImg.img = Plant1;
+      break;
+    case 2:
+      PlantImg.img = Plant2;
+      break;
+    case 3:
+      PlantImg.img = Plant3;
+      break;
+    case 4:
+      PlantImg.img = Plant4;
+      break;
+    case 5:
+      PlantImg.img = Plant5;
+      break;
+    case 6:
+      PlantImg.img = Plant6;
+      break;
+    case 7:
+      PlantImg.img = Plant7;
+      break;
+    case 8:
+      PlantImg.img = Plant8;
+      break;
+  }
+
+  return( 
+      <Image source={PlantImg.img} style={styles.Plant} />
+  );
+}
+
 export default class MainScreen extends Component {
   constructor(props) {
     super(props);
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
 
     this.state = {
       img: require('../assets/Plant6.png'),
       visible: true,
-      _plantNum: 0,
+      _num: 0
     };
   }
 
-  callbackFromCollection(data) {
-    this.setState({ _plantNum: data });
-  }
-
-  callChildMethod=()=>{
-    this.child.childMethod(this.state.Usrname);
-  }
+  forceUpdateHandler(){
+    this.forceUpdate();
+  };
 
   giveNutrition = () => {
     this.setState({ img: require('../assets/Plant_Nutrition.png') });
-  }
+  };
 
   giveWater = () => {
     this.setState({ img: require('../assets/Plant_Water.png') });
-  }
+  };
 
   giveLight = () => {
     this.setState({ img: require('../assets/Plant_Light.png') });
-  }
+  };
 
   render() {
     let animatedStyle = { transform: [{ translateY: this.state.offsetY }] };
     const { visible } = this.state;
     return (
-      <SafeAreaView style={styles.container}>
-        {/*<CollectionScreen ref={ref => (this.child = ref)}
-        referenceCallback = {this.callbackFromCollection.bind(this)} />*/}
+      <SafeAreaView style={styles.container}>        
         {/* Main 화면 구성 부분*/}
         <ImageBackground
           style={{ width: '100%', flex: 10 }}
           source={BackGround}
         >
+          <View style={{flex:1}} />
           {/* 상단버튼 */}
           <View view style={styles.topmenu}>
             <TouchableOpacity
@@ -103,12 +152,13 @@ export default class MainScreen extends Component {
             >
               <Image
                 source={require("../assets/Collection.png")}
+                style={{height: '70%', width: 70, resizeMode: 'contain'}}
               />
             </TouchableOpacity>
             <Button
               icon="book" style={styles.collection}
               mode="contained"
-              onPress={() => this.props.navigation.navigate("TodayList")}
+              onPress={() => this.forceUpdateHandler}
             />
 
           </View>
@@ -147,8 +197,11 @@ export default class MainScreen extends Component {
           <View style={{ flex: 1 }} />
           {/* 중앙 식물 */}
           <View View style={styles.PlantSpot}>
-            <Image source={this.state.img} style={styles.Plant} />
+            <SetImage />
+            {/*<Image source={this.state.img} style={styles.Plant} />*/}
           </View>
+
+          <View style={{flex:1}} />
         </ImageBackground>
 
         {/* BottomBar 구성 부분*/}
@@ -163,7 +216,7 @@ export default class MainScreen extends Component {
               style={styles.bottombarImage}
             >
               <Image
-                source={require("../assets/Home.png")}
+                source={require("../assets/Home_S.png")}
                 style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
               />
             </TouchableOpacity>
@@ -200,7 +253,7 @@ export default class MainScreen extends Component {
 
             </TouchableOpacity>
           </View>
-
+          
         </ImageBackground>
 
         {/* Start 화면 구성 부분*/}
