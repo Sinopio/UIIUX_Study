@@ -49,69 +49,69 @@ export default class CollectionScreen extends Component {
           <View style={{ justifyContent: 'space-around', alignItems: 'center', flexDirection: 'column', }}>
             
             <View style={styles.collenction}>
-              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(1), borderWidth:2 }]}>
+              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(1), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
                   {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 1 }) }}
-                >
-                  <Image style={styles.image1} source={require('../assets/Plant6.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-
-              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(2), borderWidth:2 }]}>
-                <TouchableOpacity onPress=
-                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 2 }) }}
                 >
                   <Image style={styles.image1} source={require('../assets/Plant1.png')}
                   />
                 </TouchableOpacity>
               </View>
-            </View>
 
-            <View style={styles.collenction}>
-            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(3), borderWidth:2 }]}>
+              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(2), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
-                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 3 }) }}
+                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 2 }) }}
                 >
                   <Image style={styles.image1} source={require('../assets/Plant2.png')}
                   />
                 </TouchableOpacity>
               </View>
+            </View>
 
-
-              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(4), borderWidth:2 }]}>
+            <View style={styles.collenction}>
+            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(3), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
-                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 4 }) }}
+                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 3 }) }}
                 >
                   <Image style={styles.image1} source={require('../assets/Plant3.png')}
                   />
                 </TouchableOpacity>
               </View>
-            </View>
 
-            <View style={styles.collenction}>
-            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(5), borderWidth:2 }]}>
+
+              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(4), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
-                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 5 }) }}
+                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 4 }) }}
                 >
                   <Image style={styles.image1} source={require('../assets/Plant4.png')}
                   />
                 </TouchableOpacity>
               </View>
+            </View>
+
+            <View style={styles.collenction}>
+            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(5), borderWidth:3 }]}>
+                <TouchableOpacity onPress=
+                  {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 5 }) }}
+                >
+                  <Image style={styles.image1} source={require('../assets/Plant5.png')}
+                  />
+                </TouchableOpacity>
+              </View>
 
 
-              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(6), borderWidth:2 }]}>
+              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(6), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
                   {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 6 }) }}
                 >
-                  <Image style={styles.image1} source={require('../assets/Plant5.png')}
+                  <Image style={styles.image1} source={require('../assets/Plant6.png')}
                   />
                 </TouchableOpacity>
               </View>
             </View>
 
             <View style={styles.collenction}>
-            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(7), borderWidth:2 }]}>
+            <View style={[styles.outside, {borderColor: CollectionScreen.setColor(7), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
                   {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 7 }) }}
                 >
@@ -121,7 +121,7 @@ export default class CollectionScreen extends Component {
               </View>
 
 
-              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(8), borderWidth:2 }]}>
+              <View style={[styles.outside, {borderColor: CollectionScreen.setColor(8), borderWidth:3 }]}>
                 <TouchableOpacity onPress=
                   {() => { this.setState({ visible: !visible }), this.setState({ plantNum: 8 }) }}
                 >

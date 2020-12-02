@@ -15,12 +15,12 @@ import CollectionScreen from '../screens/CollectionScreen';
 import BackGround from '../assets/MainBackGround.png';
 import BottomBar from '../assets/BottomBar.png';
 import StartScreen from '../assets/StartSceen.png';
-import Plant1 from '../assets/Plant6.png';
-import Plant2 from '../assets/Plant1.png';
-import Plant3 from '../assets/Plant2.png';
-import Plant4 from '../assets/Plant3.png';
-import Plant5 from '../assets/Plant4.png';
-import Plant6 from '../assets/Plant5.png';
+import Plant1 from '../assets/Plant1.gif';
+import Plant2 from '../assets/Plant2.gif';
+import Plant3 from '../assets/Plant3.gif';
+import Plant4 from '../assets/Plant4.png';
+import Plant5 from '../assets/Plant5.png';
+import Plant6 from '../assets/Plant6.png';
 import Plant7 from '../assets/Plant7.png';
 import Plant8 from '../assets/Plant8.png';
 
@@ -117,7 +117,7 @@ export default class MainScreen extends Component {
       _num: 0
     };
   }
-
+  
   forceUpdateHandler(){
     this.forceUpdate();
   };
