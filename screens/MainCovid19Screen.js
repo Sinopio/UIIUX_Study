@@ -3,18 +3,27 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
 import { Paragraph, DataTable, Card, Title, Divider } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Diary from '../assets/pic.png';
 import BottomBar from '../assets/BottomBar.png'
+
+import covidBack1 from '../assets/covid_back1.png'
+import covidBack2 from '../assets/covid_back2.png'
+import news_bt from '../assets/news.png'
+import gps_bt from '../assets/gps.png'
 
 const Covid19Screen = ({ navigation }) => {
   return (
     <View style={styles.maincontainer}>
 
       <View style={{ width: '100%', flex: 10 }}>
+
         <View style={styles.container0} >
 
           <View style={styles.container} >
-
+            
+            <ImageBackground
+            style={{ width: '100%', flex: 1.5 }}
+            source={covidBack1}
+            >
             <DataTable>
               <DataTable.Header>
                 <DataTable.Title>확진자 정보</DataTable.Title>
@@ -45,19 +54,43 @@ const Covid19Screen = ({ navigation }) => {
                 label="1-2 of 6"
               />
             </DataTable>
-
+            </ImageBackground>
           </View>
+            
+        <View style={styles.container2} >
+            
+            <ImageBackground
+              style={{ width: '100%', flex: 1 }}
+              source={covidBack2}
+              >
 
-          <View style={styles.container} >
+            <View style={styles.container3}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Sub1Covid19Screen")}
+              style={styles.bttImage}
+            >
+              <Image
+                source={gps_bt}
+                style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+              />
+            </TouchableOpacity>
 
-            <Button title="현재 위치" onPress={() => navigation.navigate("Sub1Covid19Screen")} />
-            <Paragraph>                        </Paragraph>
-            <Button title="선별 진료소" />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Sub1Covid19Screen2")}
+              style={styles.bttImage}
+            >
+              <Image
+                source={news_bt}
+                style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+              />
+            </TouchableOpacity>
+            </View>
 
-          </View>
-
+            </ImageBackground>
+        
         </View>
       </View>
+    </View>
 
       {/*BottomBar*/}
       <ImageBackground
@@ -92,7 +125,7 @@ const Covid19Screen = ({ navigation }) => {
           >
             <Image
               source={require("../assets/Wuhan19_S.png")}
-              style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+              style={{ height: '100%', width: '100%', resizeMode: 'contain'  }}
             />
           </TouchableOpacity>
 
@@ -127,6 +160,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'flex-start',
+    margin: 20,
+  },
+
+  container2: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    margin: 20,
+  },
+
+  container3: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    margin: 20,
   },
 
   Plant1: {
@@ -157,6 +205,11 @@ const styles = StyleSheet.create({
   bottombarImage: {
     width: 50,
     height: 50,
+  },
+
+  bttImage: {
+    width: 60,
+    height: 60,
   },
 });
 
