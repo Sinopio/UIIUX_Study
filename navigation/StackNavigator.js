@@ -40,8 +40,8 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Sub1DiaryScreen" component={Sub1DiaryScreen}/>
 
       <Stack.Screen name="MainCovid19" component={MainCovid19Screen}/>
-      <Stack.Screen name="Sub1Covid19Screen" component={Sub1Covid19Screen}/>
-      <Stack.Screen name="Sub1Covid19Screen2" component={Sub1Covid19Screen2}/>
+      <Stack.Screen name="코로나진료소" component={Sub1Covid19Screen}/>
+      <Stack.Screen name="코로나현황" component={Sub1Covid19Screen2}/>
     </Stack.Navigator>
   );
 }

@@ -66,7 +66,7 @@ const Covid19Screen = ({ navigation }) => {
 
             <View style={styles.container3}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Sub1Covid19Screen")}
+              onPress={() => navigation.navigate("코로나진료소")}
               style={styles.bttImage}
             >
               <Image
@@ -76,7 +76,7 @@ const Covid19Screen = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("Sub1Covid19Screen2")}
+              onPress={() => navigation.navigate("코로나현황")}
               style={styles.bttImage}
             >
               <Image
