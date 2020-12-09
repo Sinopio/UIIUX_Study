@@ -4,7 +4,10 @@ import { Avatar, Button, Card, Title, Paragraph,
   Divider, IconButton, FAB, Portal, Provider } from 'react-native-paper';
 import { ScrollView, View, StyleSheet, ImageBackground, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Diary from '../assets/pic.png';
+import Diary1 from '../assets/pic_1.png';
+import Diary2 from '../assets/pic_2.png';
+import Diary3 from '../assets/pic_3.png';
+
 import BottomBar from '../assets/BottomBar.png'
 
 const DiaryScreen = ({ navigation }) => {
@@ -18,27 +21,13 @@ const DiaryScreen = ({ navigation }) => {
       <View style={{ width: '100%', flex: 10 }}>
         <View>
           <ScrollView>
-
-            <Card style={styles.card}>
-              <Card.Cover source={Diary} />
-              <Card.Actions style>
-
-              </Card.Actions>
-            </Card>
-
-            <Card style={styles.card}>
-              <Card.Cover source={Diary} />
-              <Card.Actions>
-
-              </Card.Actions>
-            </Card>
-
-            <Card style={styles.card}>
-              <Card.Cover source={Diary} />
-              <Card.Actions>
-              </Card.Actions>
-            </Card>
-
+            
+          <Image source ={Diary1}>
+          </Image>
+          <Image source ={Diary2}>
+          </Image>
+          <Image source ={Diary3}>
+          </Image>
 
           </ScrollView>
           <Provider>
@@ -138,9 +127,12 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    flexDirection: 'row',
+    resizeMode : 'contain',
+    margin: 5,
+  },
 
-    margin: 20,
+  pic: {
+    height: '100%',
   },
 
   fab: {
@@ -153,7 +145,7 @@ const styles = StyleSheet.create({
 
   maincontainer: {
     flex: 1,
-
+    backgroundColor: "#FCFDEE",
   },
   bottombarstyle: {
     flex: 3,
@@ -167,6 +159,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+
+  Plant1:{
+    resizeMode : 'cover',
+    margin: 10,
+  },
+
 });
 
 export default DiaryScreen;

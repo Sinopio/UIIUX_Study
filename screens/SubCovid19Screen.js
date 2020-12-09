@@ -1,3 +1,40 @@
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import {WebView} from 'react-native-webview';
+
+const Sub1Covid19Screen = ({navigation}) =>{
+  return(
+
+      <WebView style={{ width: '100%', height: '100%' }}
+      mixedContentMode='always' 
+      source={{ uri: `https://www.mohw.go.kr/react/popup_200128.html` }}
+      useWebKit={true} 
+      scrollEnabled={false} 
+      domStorageEnabled={true} 
+      javaScriptEnabled={true}>
+      </WebView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Plant1:{
+    width: '100%',
+    height: '80%',
+    resizeMode : 'contain'
+  },
+});
+
+export default Sub1Covid19Screen;
+
+
+/* 지도 기능 구현 코드, 선별진료소 검색 및 길찾기를 기능을 넣기 위해 구현적 한계로 폐기
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Alert } from "react-native";
@@ -84,3 +121,4 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
+*/

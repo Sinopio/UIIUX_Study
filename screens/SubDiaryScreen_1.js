@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
-import Diary from '../assets/nuguri.jpg';
+import Diary from '../assets/diary_pic.png';
 
 const Sub1DiaryScreen = ({navigation}) =>{
 
@@ -15,6 +15,7 @@ const Sub1DiaryScreen = ({navigation}) =>{
 
       <View style={styles.container} > 
       <Image source={Diary} style = {styles.Plant1} />
+      
       </View>
 
       <View style={styles.container} > 
@@ -36,12 +37,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
+    backgroundColor: "#FCFDEE",
   },
 
   Plant1:{
     width: '100%',
     height: '100%',
     resizeMode : 'contain',
+
   },
 });
 

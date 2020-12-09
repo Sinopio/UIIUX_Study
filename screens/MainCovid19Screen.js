@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-na
 import { Paragraph, DataTable, Card, Title, Divider } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import BottomBar from '../assets/BottomBar.png'
+import {WebView} from 'react-native-webview';
 
 import covidBack1 from '../assets/covid_back1.png'
 import covidBack2 from '../assets/covid_back2.png'
@@ -27,33 +28,31 @@ const Covid19Screen = ({ navigation }) => {
             <DataTable>
               <DataTable.Header>
                 <DataTable.Title>확진자 정보</DataTable.Title>
-                <DataTable.Title numeric>확진자 수</DataTable.Title>
+                <DataTable.Title numeric>명 수(전일대비)</DataTable.Title>
               </DataTable.Header>
 
               <DataTable.Row>
-                <DataTable.Cell>현재 확진환자</DataTable.Cell>
-                <DataTable.Cell numeric>159</DataTable.Cell>
+                <DataTable.Cell>격리중</DataTable.Cell>
+                <DataTable.Cell numeric>8699(+155)</DataTable.Cell>
               </DataTable.Row>
 
               <DataTable.Row>
-                <DataTable.Cell>총 확진자</DataTable.Cell>
-                <DataTable.Cell numeric>1100</DataTable.Cell>
+                <DataTable.Cell>격리해제</DataTable.Cell>
+                <DataTable.Cell numeric>30177(+527)</DataTable.Cell>
               </DataTable.Row>
 
               <DataTable.Row>
-                <DataTable.Cell>지역 확진자</DataTable.Cell>
-                <DataTable.Cell numeric>36</DataTable.Cell>
+                <DataTable.Cell>확진자</DataTable.Cell>
+                <DataTable.Cell numeric>39,432(+686)</DataTable.Cell>
               </DataTable.Row>
 
-              <DataTable.Pagination
-                page={1}
-                numberOfPages={2}
-                onPageChange={page => {
-                  console.log(page);
-                }}
-                label="1-2 of 6"
-              />
+              <DataTable.Row>
+                <DataTable.Cell>사망자</DataTable.Cell>
+                <DataTable.Cell numeric>556(+4)</DataTable.Cell>
+              </DataTable.Row>
+
             </DataTable>
+
             </ImageBackground>
           </View>
             
@@ -64,27 +63,29 @@ const Covid19Screen = ({ navigation }) => {
               source={covidBack2}
               >
 
-            <View style={styles.container3}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("코로나진료소")}
-              style={styles.bttImage}
-            >
-              <Image
-                source={gps_bt}
-                style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
-              />
-            </TouchableOpacity>
+              <View style={styles.container3}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("코로나진료소")}
+                  style={styles.bttImage}
+                >
+                  <Image
+                    source={gps_bt}
+                    style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+                  />
+                </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => navigation.navigate("코로나현황")}
-              style={styles.bttImage}
-            >
-              <Image
-                source={news_bt}
-                style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
-              />
-            </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("코로나현황")}
+                  style={styles.bttImage}
+                >
+                  <Image
+                    source={news_bt}
+                    style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+                  />
+                
+                </TouchableOpacity>
+                
+              </View>
 
             </ImageBackground>
         
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: "#FCFDEE",
   },
 
   container: {
@@ -192,6 +194,7 @@ const styles = StyleSheet.create({
 
   maincontainer: {
     flex: 1,
+    backgroundColor: "#FCFDEE",
 
   },
   bottombarstyle: {
