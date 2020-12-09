@@ -7,7 +7,7 @@ import {
 import { Modal, Portal, Provider, Divider, Dialog, Button } from 'react-native-paper';
 import Animated, {
   Easing, useSharedValue, withSpring, useAnimatedStyle,
-  repeat, delay, useAnimatedGestureHandler, withTiming, sequence
+  repeat, delay, useAnimatedGestureHandler, withTiming, sequence, useAnimatedProps
 } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -23,6 +23,10 @@ import Plant5 from '../assets/Plant5.png';
 import Plant6 from '../assets/Plant6.png';
 import Plant7 from '../assets/Plant7.png';
 import Plant8 from '../assets/Plant8.png';
+import TodayGoal from '../assets/TodayGoal.png';
+import Inter1 from '../assets/Drops.gif';
+import Inter2 from '../assets/Fertilizer.gif';
+import Inter3 from '../assets/Sunshine.gif';
 
 const StartButtonAni = (props) => {
   const x = useSharedValue(0);
@@ -62,11 +66,38 @@ const StartButtonAni = (props) => {
   );
 }
 
+const Redraw = (navigation) => {
+  const refresh = useSharedValue(0);
+
+  const refreshScreen = () => {
+    refresh.value = repeat(sequence(
+      withTiming(5.0, {duration: 1400}),
+      withTiming(0, {duration: 1400}),
+    ), -1, true);
+  }
+  
+  const animatedProps = useAnimatedStyle(()=>{
+    const result = refresh;
+    return { d: result.value };
+  })
+
+  return (
+    <Animated.View style={[animatedProps]}>
+      <TouchableWithoutFeedback onPress={refreshScreen} style={{ flex: 1 }}>
+              <Image
+                source={require("../assets/Collection.png")}
+                style={{height: '100%', width: 70, resizeMode: 'contain', marginLeft: 10}}
+              />
+              </TouchableWithoutFeedback>
+    </Animated.View>
+  )
+}
+
 const SetImage = (props) => {
   const [plantNum, setNumber] = useState(CollectionScreen.getPlantNum());
   const PlantImg = {img:  Plant1};
 
-  console.log("setImageCalled >> ", CollectionScreen.getPlantNum());
+  //console.log("setImageCalled >> ", CollectionScreen.getPlantNum());
 
   useEffect(() => {
 
@@ -109,34 +140,54 @@ const SetImage = (props) => {
 export default class MainScreen extends Component {
   constructor(props) {
     super(props);
-    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+   
 
     this.state = {
-      img: require('../assets/Plant6.png'),
+      img: Inter1,
       visible: true,
-      _num: 0
+      effectVisible: false,
+      interactionNUm: 0
     };
   }
   
-  forceUpdateHandler(){
-    this.forceUpdate();
-  };
-
   giveNutrition = () => {
-    this.setState({ img: require('../assets/Plant_Nutrition.png') });
+    this.setState({ interactionNUm: 2});
   };
 
   giveWater = () => {
-    this.setState({ img: require('../assets/Plant_Water.png') });
+    this.setState({ interactionNUm: 1});
   };
 
   giveLight = () => {
-    this.setState({ img: require('../assets/Plant_Light.png') });
+    this.setState({ interactionNUm: 3});
   };
+
+  interactionPlant = (num) => {
+    switch (num) {
+      case 1:
+        this.setState({img:Inter1 });
+        break;
+      case 2:
+        this.setState({img:Inter2 });
+        break;
+      case 3:
+        this.setState({img:Inter3 });
+        break;
+    }
+    console.log("!")
+  }
+
+  refreshPlant = () => {
+    this.setState({ img: require('../assets/Plant_Light.png') });
+    console.log("call setstate");
+    console.log("");
+  }
 
   render() {
     let animatedStyle = { transform: [{ translateY: this.state.offsetY }] };
     const { visible } = this.state;
+    const { effectVisible } = this.state;
+    const { interactionNUm } = this.state;
     return (
       <SafeAreaView style={styles.container}>        
         {/* Main 화면 구성 부분*/}
@@ -144,28 +195,35 @@ export default class MainScreen extends Component {
           style={{ width: '100%', flex: 10 }}
           source={BackGround}
         >
-          <View style={{flex:1}} />
+          <View style={{ flex: 1 }} />
           {/* 상단버튼 */}
           <View view style={styles.topmenu}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Collection")}
-            >
-              <Image
-                source={require("../assets/Collection.png")}
-                style={{height: '70%', width: 70, resizeMode: 'contain'}}
-              />
-            </TouchableOpacity>
-            <Button
-              icon="book" style={styles.collection}
-              mode="contained"
-              onPress={() => this.forceUpdateHandler}
-            />
+            <View>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Collection")}
+              >
+                <Redraw />
+              </TouchableOpacity>
+            </View>
 
+            <View>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("TodayList")}
+              >
+                <Image
+                  source={TodayGoal}
+                  style={{ height: 120, width: 170, resizeMode: 'contain', marginLeft: 100 }}
+                />
+              </TouchableOpacity>
+            </View>
+
+            
           </View>
           {/* 물 */}
           <View style={styles.middlemenu1}>
             <TouchableOpacity
-              onPress={this.giveWater} style={styles.SpotButton}
+              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(1)}} 
+              style={styles.SpotButton}
             >
               <Image
                 source={require("../assets/water.png")}
@@ -176,7 +234,8 @@ export default class MainScreen extends Component {
           {/* 삽, 햇빛 */}
           <View style={styles.middlemenu2}>
             <TouchableOpacity
-              onPress={this.giveNutrition} style={styles.SpotButton}
+              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(2)}} 
+               style={styles.SpotButton}
             >
               <Image
                 source={require("../assets/shovel.png")}
@@ -185,7 +244,8 @@ export default class MainScreen extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={this.giveLight} style={styles.SpotButton}
+              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(3)}} 
+               style={styles.SpotButton}
             >
               <Image
                 source={require("../assets/sun.png")}
@@ -275,6 +335,22 @@ export default class MainScreen extends Component {
             </View>
 
           </ImageBackground>
+        </Modal>
+
+        
+
+        <Modal
+          visible={this.state.effectVisible}
+          animationType="fade"
+          
+          onDismiss={() => this.setState({ effectVisible: !effectVisible })}
+          contentContainerStyle={{ width: '100%', height: '10%', backgroundColor: 'rgba(0, 0, 0, 0.0)'}}
+        >
+          <Image
+            source={this.state.img}
+            style={{width: 100, height: 100, resizeMode: 'contain', marginLeft:250, marginBottom:50}}
+
+          />
         </Modal>
 
       </SafeAreaView>

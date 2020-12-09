@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, ScrollView, NativeModules } from 'react-native';
 import { Modal, Portal, Provider, Divider, Dialog, Button } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import MainScreen from './MainScreen';
 
 export default class CollectionScreen extends Component {
   constructor(props) {
@@ -43,6 +44,9 @@ export default class CollectionScreen extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+        <MainScreen ref={child =>{
+          this.child = child;
+        }} />
         <ScrollView
           style={{ width: '100%', }}
         >
@@ -147,7 +151,8 @@ export default class CollectionScreen extends Component {
                   <Button onPress={() => {
                     CollectionScreen.setPlantNum(plantNum),
                     //this.props.navigation.navigate("Main"),
-                    this.setState({ visible: !visible })
+                    this.setState({ visible: !visible }),
+                    this.child.refreshPlant();
                   }}>
                     네
                     </Button>
