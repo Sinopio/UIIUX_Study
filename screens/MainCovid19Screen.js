@@ -11,7 +11,46 @@ import covidBack2 from '../assets/covid_back2.png'
 import news_bt from '../assets/news.png'
 import gps_bt from '../assets/gps.png'
 
+
+var Death
+var Decide
+var Clear;
+
+var xhr = new XMLHttpRequest();
+xhr.timeout = 100000;
+var url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson'; 
+var queryParams = '?' + encodeURIComponent('ServiceKey') + '=' +'aGZxAGSdhhBS6kMucvCDKjU%2FIoeXFRKwjE9pPDlZ3ODPf4FI7OWPRW%2B6fc%2FNsYN%2Fb8x9suCgsyT8Cg86GEM4WA%3D%3D'; 
+queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); 
+queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); 
+queryParams += '&' + encodeURIComponent('startCreateDt') + '=' + encodeURIComponent('20201222'); 
+queryParams += '&' + encodeURIComponent('endCreateDt') + '=' + encodeURIComponent('20201222'); 
+xhr.open('GET', url + queryParams);
+xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      //alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+      var json_str = JSON.stringify(this.responseText);
+      //console.log(json_str);
+      var obj = JSON.parse(json_str);
+      //console.log(obj);
+
+      var re = /[<][^>]*[>]/gi;
+      var List = this.responseText.replace(re,' ');
+      var List = List.split(' ');
+      console.log(List[26]);
+      console.log(List[28]);
+      console.log(List[21]);
+
+      Death = List[26];
+      Decide = List[28];
+      Clear = List[21];
+    }
+
+};
+
+xhr.send('');
+
 const Covid19Screen = ({ navigation }) => {
+ 
   return (
     <View style={styles.maincontainer}>
 
@@ -22,33 +61,27 @@ const Covid19Screen = ({ navigation }) => {
           <View style={styles.container} >
             
             <ImageBackground
-            style={{ width: '100%', flex: 1.5 }}
+            style={{ width: '100%', flex: 3}}
             source={covidBack1}
             >
             <DataTable>
               <DataTable.Header>
                 <DataTable.Title>확진자 정보</DataTable.Title>
-                <DataTable.Title numeric>명 수(전일대비)</DataTable.Title>
+                <DataTable.Title numeric>누적 인원수</DataTable.Title>
               </DataTable.Header>
-
-              <DataTable.Row>
-                <DataTable.Cell>격리중</DataTable.Cell>
-                <DataTable.Cell numeric>8699(+155)</DataTable.Cell>
-              </DataTable.Row>
-
               <DataTable.Row>
                 <DataTable.Cell>격리해제</DataTable.Cell>
-                <DataTable.Cell numeric>30177(+527)</DataTable.Cell>
+                <DataTable.Cell numeric> { Clear } </DataTable.Cell>
               </DataTable.Row>
 
               <DataTable.Row>
                 <DataTable.Cell>확진자</DataTable.Cell>
-                <DataTable.Cell numeric>39,432(+686)</DataTable.Cell>
+                <DataTable.Cell numeric> {Decide} </DataTable.Cell>
               </DataTable.Row>
 
               <DataTable.Row>
                 <DataTable.Cell>사망자</DataTable.Cell>
-                <DataTable.Cell numeric>556(+4)</DataTable.Cell>
+                <DataTable.Cell numeric> {Death} </DataTable.Cell>
               </DataTable.Row>
 
             </DataTable>
@@ -163,6 +196,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'flex-start',
     margin: 20,
+    backgroundColor: "#FCFDEE",
   },
 
   container2: {
