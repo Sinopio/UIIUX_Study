@@ -158,7 +158,7 @@ export default class App extends Component {
     });
     App._date = date;
   }
-  static _date = "2020-12-09T12:00:00.000Z";
+  static _date = "2020-12-23T12:00:00.000Z";
 
   render() {
     const { selectedStartDate } = this.state;

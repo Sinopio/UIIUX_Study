@@ -151,8 +151,7 @@ export default class CollectionScreen extends Component {
                   <Button onPress={() => {
                     CollectionScreen.setPlantNum(plantNum),
                     //this.props.navigation.navigate("Main"),
-                    this.setState({ visible: !visible }),
-                    this.child.refreshPlant();
+                    this.setState({ visible: !visible })
                   }}>
                     네
                     </Button>

@@ -23,7 +23,9 @@ import Plant5 from '../assets/Plant5.png';
 import Plant6 from '../assets/Plant6.png';
 import Plant7 from '../assets/Plant7.png';
 import Plant8 from '../assets/Plant8.png';
+
 import TodayGoal from '../assets/TodayGoal.png';
+
 import Inter1 from '../assets/Drops.gif';
 import Inter2 from '../assets/Fertilizer.gif';
 import Inter3 from '../assets/Sunshine.gif';
@@ -71,12 +73,12 @@ const Redraw = (navigation) => {
 
   const refreshScreen = () => {
     refresh.value = repeat(sequence(
-      withTiming(5.0, {duration: 1400}),
-      withTiming(0, {duration: 1400}),
+      withTiming(5.0, { duration: 1400 }),
+      withTiming(0, { duration: 1400 }),
     ), -1, true);
   }
-  
-  const animatedProps = useAnimatedStyle(()=>{
+
+  const animatedProps = useAnimatedStyle(() => {
     const result = refresh;
     return { d: result.value };
   })
@@ -84,20 +86,20 @@ const Redraw = (navigation) => {
   return (
     <Animated.View style={[animatedProps]}>
       <TouchableWithoutFeedback onPress={refreshScreen} style={{ flex: 1 }}>
-              <Image
-                source={require("../assets/Collection.png")}
-                style={{height: '100%', width: 70, resizeMode: 'contain', marginLeft: 10}}
-              />
-              </TouchableWithoutFeedback>
+        <Image
+          source={require("../assets/Collection.png")}
+          style={{ height: '100%', width: 70, resizeMode: 'contain', marginLeft: 10 }}
+        />
+      </TouchableWithoutFeedback>
     </Animated.View>
   )
 }
 
 const SetImage = (props) => {
   const [plantNum, setNumber] = useState(CollectionScreen.getPlantNum());
-  const PlantImg = {img:  Plant1};
+  const PlantImg = { img: Plant1 };
 
-  //console.log("setImageCalled >> ", CollectionScreen.getPlantNum());
+  console.log("setImageCalled >> ", CollectionScreen.getPlantNum());
 
   useEffect(() => {
 
@@ -132,64 +134,64 @@ const SetImage = (props) => {
       break;
   }
 
-  return( 
-      <Image source={PlantImg.img} style={styles.Plant} />
+  return (
+    <Image source={PlantImg.img} style={styles.Plant} />
   );
 }
 
 export default class MainScreen extends Component {
   constructor(props) {
     super(props);
-   
 
     this.state = {
       img: Inter1,
       visible: true,
       effectVisible: false,
-      interactionNUm: 0
+      interactionNUm: 0,
+      fadeAnim: new Animated.Value(0)
     };
   }
-  
-  giveNutrition = () => {
-    this.setState({ interactionNUm: 2});
-  };
-
-  giveWater = () => {
-    this.setState({ interactionNUm: 1});
-  };
-
-  giveLight = () => {
-    this.setState({ interactionNUm: 3});
-  };
 
   interactionPlant = (num) => {
     switch (num) {
       case 1:
-        this.setState({img:Inter1 });
+        this.setState({ img: Inter1 });
         break;
       case 2:
-        this.setState({img:Inter2 });
+        this.setState({ img: Inter2 });
         break;
       case 3:
-        this.setState({img:Inter3 });
+        this.setState({ img: Inter3 });
         break;
     }
     console.log("!")
   }
 
-  refreshPlant = () => {
-    this.setState({ img: require('../assets/Plant_Light.png') });
-    console.log("call setstate");
-    console.log("");
+  startInteraction = () => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 1,
+      duration: 100,
+      easing: Easing.linear
+    }).start(this.endInteraction);
   }
+
+  endInteraction = () => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 0,   
+      duration: 1500,
+      easing: Easing.linear
+    }).start();
+  }
+
 
   render() {
     let animatedStyle = { transform: [{ translateY: this.state.offsetY }] };
     const { visible } = this.state;
     const { effectVisible } = this.state;
     const { interactionNUm } = this.state;
+
     return (
-      <SafeAreaView style={styles.container}>        
+      <SafeAreaView style={styles.container}>
         {/* Main 화면 구성 부분*/}
         <ImageBackground
           style={{ width: '100%', flex: 10 }}
@@ -217,12 +219,12 @@ export default class MainScreen extends Component {
               </TouchableOpacity>
             </View>
 
-            
+
           </View>
           {/* 물 */}
           <View style={styles.middlemenu1}>
             <TouchableOpacity
-              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(1)}} 
+              onPress={() => { this.interactionPlant(1), this.startInteraction() }}
               style={styles.SpotButton}
             >
               <Image
@@ -234,8 +236,8 @@ export default class MainScreen extends Component {
           {/* 삽, 햇빛 */}
           <View style={styles.middlemenu2}>
             <TouchableOpacity
-              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(2)}} 
-               style={styles.SpotButton}
+              onPress={() => { this.interactionPlant(2), this.startInteraction() }}
+              style={styles.SpotButton}
             >
               <Image
                 source={require("../assets/shovel.png")}
@@ -244,8 +246,8 @@ export default class MainScreen extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {this.setState({ effectVisible: !effectVisible }), this.interactionPlant(3)}} 
-               style={styles.SpotButton}
+              onPress={() => { this.interactionPlant(3), this.startInteraction() }}
+              style={styles.SpotButton}
             >
               <Image
                 source={require("../assets/sun.png")}
@@ -261,7 +263,7 @@ export default class MainScreen extends Component {
             {/*<Image source={this.state.img} style={styles.Plant} />*/}
           </View>
 
-          <View style={{flex:1}} />
+          <View style={{ flex: 1 }} />
         </ImageBackground>
 
         {/* BottomBar 구성 부분*/}
@@ -313,7 +315,18 @@ export default class MainScreen extends Component {
 
             </TouchableOpacity>
           </View>
-          
+
+          <Animated.View style={[styles.interactionStyle, {
+            opacity: this.state.fadeAnim
+          }]}>
+
+            <Image
+              source={this.state.img}
+              style={{ width: 100, height: 100, resizeMode: 'contain', marginLeft: 250, marginBottom: 50 }}
+            />
+
+          </Animated.View>
+
         </ImageBackground>
 
         {/* Start 화면 구성 부분*/}
@@ -335,22 +348,6 @@ export default class MainScreen extends Component {
             </View>
 
           </ImageBackground>
-        </Modal>
-
-        
-
-        <Modal
-          visible={this.state.effectVisible}
-          animationType="fade"
-          
-          onDismiss={() => this.setState({ effectVisible: !effectVisible })}
-          contentContainerStyle={{ width: '100%', height: '10%', backgroundColor: 'rgba(0, 0, 0, 0.0)'}}
-        >
-          <Image
-            source={this.state.img}
-            style={{width: 100, height: 100, resizeMode: 'contain', marginLeft:250, marginBottom:50}}
-
-          />
         </Modal>
 
       </SafeAreaView>
@@ -420,5 +417,10 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
+  },
+  interactionStyle: {
+    position: 'absolute',
+    right: 30,
+    bottom: 250,
   },
 });
